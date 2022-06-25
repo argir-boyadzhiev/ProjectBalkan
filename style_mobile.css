@@ -1,0 +1,22 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: darkgreen;
+    user-select: none;
+    text-align: center;
+}
+
+#interactiveMap {
+    width: 100%;
+    height: 90vh;
+    margin-bottom: 3%;
+    cursor: grab;
+}
+
+#information {
+    width: 100%;
+    margin-top: 3%;
+    background-color: yellow;
+}

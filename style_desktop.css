@@ -1,0 +1,19 @@
+#interactiveMap {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 69%;
+    height: 99vh;
+    display: inline-block;
+    margin-bottom: 0%;
+}
+
+#information {
+    position: fixed;
+    top: 0%;
+    right: 0%;
+    width: 30%;
+    height: 99vh;
+    display: inline-block;
+    margin-top: 0%;
+}

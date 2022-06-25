@@ -64,6 +64,8 @@ function initMap() {
         iMap.htmlElement.style.backgroundPositionY = iMap.background.posY + "px";
         iMap.htmlElement.style.backgroundSize = iMap.background.size + "px";
     };
+    
+    iMap.updateBackground();
 
     iMap.htmlElement.addEventListener('mousedown', (event) => {
         if(event.button == 0) {
@@ -96,12 +98,29 @@ function initMap() {
         return iMap.htmlElement.clientWidth / iMap.htmlElement.clientHeight;
     };
 
-    iMap.htmlElement.addEventListener('wheel', (event) => {
-        iMap.background.size -= event.deltaY / 5;
-        iMap.updateBackground();
+    window.addEventListener('resize', iMap.updateBackground);
+
+    /// For mobile:
+    iMap.htmlElement.addEventListener('touchstart', (event) => {
+        mouse.lastX = event.clientX;
+        mouse.lastY = event.clientY;
+        mouse.inDrag = true;
     });
 
-    window.addEventListener('resize', () => {
-        iMap.updateBackground();
+    // This has to be on the intire window because the mouse can go outside of the map(and the body)
+    window.addEventListener('touchend', (event) => {
+        mouse.inDrag = false;
+    });
+
+    iMap.htmlElement.addEventListener('touchmove', (event) => {
+        if(mouse.inDrag){
+            let xChange = event.clientX - mouse.lastX;
+            let yChange = event.clientY - mouse.lastY;
+            mouse.lastX = event.clientX;
+            mouse.lastY = event.clientY;
+            iMap.background.posX += xChange;
+            iMap.background.posY += yChange;
+            iMap.updateBackground();
+        }
     });
 }
