@@ -59,10 +59,6 @@ function initMap() {
         else if(iMap.background.posY < iMap.htmlElement.clientHeight - (iMap.background.size / MAP_DATA.imageWidthToHeight)) {
             iMap.background.posY = iMap.htmlElement.clientHeight - (iMap.background.size / MAP_DATA.imageWidthToHeight);
         }
-
-        console.log(iMap.background.posX + "px X");
-        console.log(iMap.background.posY + "px Y");
-        console.log(iMap.background.size + "px size");
         
         // Apply change
         iMap.htmlElement.style.backgroundPositionX = iMap.background.posX + "px";
@@ -107,6 +103,7 @@ function initMap() {
 
     /// For mobile:
     iMap.htmlElement.addEventListener('touchstart', (event) => {
+        document.documentElement.style.overflow = 'hidden';
         mouse.lastX = event.touches[0].clientX;
         mouse.lastY = event.touches[0].clientY;
         mouse.inDrag = true;
@@ -115,6 +112,7 @@ function initMap() {
     // This has to be on the intire window because the mouse can go outside of the map(and the body)
     window.addEventListener('touchend', (event) => {
         mouse.inDrag = false;
+        document.documentElement.style.overflow = 'auto';
     });
 
     iMap.htmlElement.addEventListener('touchmove', (event) => {
