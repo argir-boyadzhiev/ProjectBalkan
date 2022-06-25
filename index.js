@@ -29,6 +29,7 @@ function initMap() {
     iMap.background.size = MAP_DATA.imageWidth;
 
     iMap.updateBackground = () => {
+        console.log("sad");
         // Validate and push back in boundaries!
         
         //Resize
@@ -59,6 +60,10 @@ function initMap() {
             iMap.background.posY = iMap.htmlElement.clientHeight - (iMap.background.size / MAP_DATA.imageWidthToHeight);
         }
 
+        console.log(iMap.background.posX + "px X");
+        console.log(iMap.background.posY + "px Y");
+        console.log(iMap.background.size + "px size");
+        
         // Apply change
         iMap.htmlElement.style.backgroundPositionX = iMap.background.posX + "px";
         iMap.htmlElement.style.backgroundPositionY = iMap.background.posY + "px";
@@ -102,8 +107,8 @@ function initMap() {
 
     /// For mobile:
     iMap.htmlElement.addEventListener('touchstart', (event) => {
-        mouse.lastX = event.clientX;
-        mouse.lastY = event.clientY;
+        mouse.lastX = event.touches[0].clientX;
+        mouse.lastY = event.touches[0].clientY;
         mouse.inDrag = true;
     });
 
@@ -114,10 +119,10 @@ function initMap() {
 
     iMap.htmlElement.addEventListener('touchmove', (event) => {
         if(mouse.inDrag){
-            let xChange = event.clientX - mouse.lastX;
-            let yChange = event.clientY - mouse.lastY;
-            mouse.lastX = event.clientX;
-            mouse.lastY = event.clientY;
+            let xChange = event.touches[0].clientX - mouse.lastX;
+            let yChange = event.touches[0].clientY - mouse.lastY;
+            mouse.lastX = event.touches[0].clientX;
+            mouse.lastY = event.touches[0].clientY;
             iMap.background.posX += xChange;
             iMap.background.posY += yChange;
             iMap.updateBackground();
